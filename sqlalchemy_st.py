@@ -39,7 +39,7 @@ class Check:
     #                                                                        3306, "isoar")
     #
     # engine = create_engine(mysql_connection_url, pool_recycle=10)
-    mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, iam_token, host,
+    mysql_connection_url = 'mysql+pymysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, iam_token, host,
                                                                            str(port), "isoar")
     engine = create_engine(mysql_connection_url,
                            connect_args=ssl_args,
