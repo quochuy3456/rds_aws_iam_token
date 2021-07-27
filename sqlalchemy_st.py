@@ -8,7 +8,7 @@ import time
 
 Base = automap_base()
 
-mysql_attr_ssl_ca = "./rds-combined-ca-bundle.pem"
+mysql_attr_ssl_ca = "rds-combined-ca-bundle.pem"
 region_name = "ap-northeast-1a"
 host = "database-3.cgjasvizzmcb.ap-northeast-1.rds.amazonaws.com"
 port = 3306
@@ -35,15 +35,15 @@ def get_authentication_token():
 
 
 class Check:
-    mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, passwd, host,
-                                                                           3306, "isoar")
-
-    engine = create_engine(mysql_connection_url, pool_recycle=10)
-    # mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, iam_token, host,
-    #                                                                        str(port), "isoar")
-    # engine = create_engine(mysql_connection_url,
-    #                        connect_args=ssl_args
-    #                        )
+    # mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, passwd, host,
+    #                                                                        3306, "isoar")
+    #
+    # engine = create_engine(mysql_connection_url, pool_recycle=10)
+    mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, iam_token, host,
+                                                                           str(port), "isoar")
+    engine = create_engine(mysql_connection_url,
+                           connect_args=ssl_args,
+                           pool_recycle=10)
 
     session_mysql = Session(engine, autoflush=True)
     Base.prepare(engine, reflect=True)
