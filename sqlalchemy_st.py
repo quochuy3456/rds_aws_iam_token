@@ -22,7 +22,7 @@ token = client.generate_db_auth_token(DBHostname=host,
                                       DBUsername=user,
                                       Region=region_name)
 iam_token = quote_plus(token)
-
+print("iam_token: ", iam_token)
 # mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, iam_token, host,
 #                                                                        str(port), "isoar")
 # engine_sql = create_engine(mysql_connection_url,
@@ -51,14 +51,14 @@ class Check:
     def __init__(self):
         self.sthhere = "here"
 
-    # @staticmethod
-    # @event.listens_for(engine, "do_connect")
-    # def provide_token(dialect, conn_rec, cargs, cparams):
-    #     print("cparams: ", cparams)
-    #     print("dialect: ", dialect)
-    #     print("conn_rec: ", conn_rec)
-    #     print("cargs: ", cargs)
-    #     cparams['passwd'] = get_authentication_token()
+    @staticmethod
+    @event.listens_for(engine, "do_connect")
+    def provide_token(dialect, conn_rec, cargs, cparams):
+        print("cparams: ", cparams)
+        print("dialect: ", dialect)
+        print("conn_rec: ", conn_rec)
+        print("cargs: ", cargs)
+        cparams['passwd'] = get_authentication_token()
 
     def run(self):
         while True:
