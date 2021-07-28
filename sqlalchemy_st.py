@@ -68,7 +68,7 @@ class Check:
     engine = create_engine(mysql_connection_url,
                            connect_args=ssl_args,
                            pool_recycle=10)
-
+    print(mysql_connection_url)
     session_mysql = Session(engine, autoflush=True)
     # Base.prepare(engine, reflect=True)
 
