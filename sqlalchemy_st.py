@@ -70,7 +70,7 @@ class Check:
                            pool_recycle=10)
     print(mysql_connection_url)
     session_mysql = Session(engine, autoflush=True)
-    # Base.prepare(engine, reflect=True)
+    Base.prepare(engine, reflect=True)
 
     def __init__(self):
         self.sthhere = "here"
