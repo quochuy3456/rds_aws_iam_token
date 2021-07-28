@@ -12,7 +12,7 @@ mysql_attr_ssl_ca = "rds-combined-ca-bundle.pem"
 region_name = "ap-northeast-1a"
 host = "database-3.cgjasvizzmcb.ap-northeast-1.rds.amazonaws.com"
 port = 3306
-user = "rds_iam_user"
+user = "rds_iam_user_home"
 passwd = "Quochuydo!1994"
 
 ssl_args = {'ssl': {'ca': mysql_attr_ssl_ca}}
