@@ -32,9 +32,24 @@ print("iam_token: ", iam_token)
     {
       "Effect" : "Allow",
       "Action" : ["rds-db:connect"],
-      "Resource" : ["arn:aws:rds-db:ap-northeast-1:521345806971:rds_iam_user:db-Z2DELENJR7BZC6X3H76KD6GUYI/isoar"]
+      "Resource" : ["arn:aws:rds-db:ap-northeast-1:521345806971:userdb:db-Z2DELENJR7BZC6X3H76KD6GUYI/rds_iam_user"]
     }
   ]
+}
+
+{
+   "Version": "2012-10-17",
+   "Statement": [
+      {
+         "Effect": "Allow",
+         "Action": [
+             "rds-db:connect"
+         ],
+         "Resource": [
+             "arn:aws-cn:rds-db:ap-northeast-1:521345806971:dbuser:db-Z2DELENJR7BZC6X3H76KD6GUYI/rds_iam_user"
+         ]
+      }
+   ]
 }
 """
 
@@ -55,7 +70,7 @@ class Check:
                            pool_recycle=10)
 
     session_mysql = Session(engine, autoflush=True)
-    Base.prepare(engine, reflect=True)
+    # Base.prepare(engine, reflect=True)
 
     def __init__(self):
         self.sthhere = "here"
