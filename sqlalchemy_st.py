@@ -24,38 +24,8 @@ token = client.generate_db_auth_token(DBHostname=host,
 iam_token = quote_plus(token)
 print("iam_token: ", iam_token)
 
-"""
-{
-  "Version" : "2012-10-17",
-  "Statement" :
-  [
-    {
-      "Effect" : "Allow",
-      "Action" : ["rds-db:connect"],
-      "Resource" : ["arn:aws:rds-db:ap-northeast-1:521345806971:userdb:db-Z2DELENJR7BZC6X3H76KD6GUYI/rds_iam_user"]
-    }
-  ]
-}
-
-{
-   "Version": "2012-10-17",
-   "Statement": [
-      {
-         "Effect": "Allow",
-         "Action": [
-             "rds-db:connect"
-         ],
-         "Resource": [
-             "arn:aws-cn:rds-db:ap-northeast-1:521345806971:dbuser:db-Z2DELENJR7BZC6X3H76KD6GUYI/rds_iam_user"
-         ]
-      }
-   ]
-}
-"""
-
 
 def get_authentication_token():
-    client = boto3.client('rds', region_name=region_name)
     token = client.generate_db_auth_token(DBHostname=host,
                                           Port=port,
                                           DBUsername=user,
@@ -74,7 +44,7 @@ class Check:
     engine = create_engine(mysql_connection_url,
                            connect_args=ssl_args,
                            pool_recycle=10)
-    print(mysql_connection_url)
+
     session_mysql = Session(engine, autoflush=True)
     Base.prepare(engine, reflect=True)
 
