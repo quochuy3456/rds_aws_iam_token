@@ -16,10 +16,10 @@ user = "rds_iam_user"
 passwd = "Quochuydo!1994"
 
 ssl_args = {'ssl': {'ca': mysql_attr_ssl_ca}}
-client = boto3.client('rds', region_name=region_name)
 
 
 def get_authentication_token():
+    client = boto3.client('rds', region_name=region_name)
     token = client.generate_db_auth_token(DBHostname=host,
                                           Port=port,
                                           DBUsername=user,
