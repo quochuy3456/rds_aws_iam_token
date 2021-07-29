@@ -47,11 +47,11 @@ class Check:
     @staticmethod
     @event.listens_for(engine, "do_connect")
     def provide_token(dialect, conn_rec, cargs, cparams):
+        cparams.update({'passwd': get_authentication_token()})
         print("cparams: ", cparams)
         # print("dialect: ", dialect)
         # print("conn_rec: ", conn_rec)
         # print("cargs: ", cargs)
-        # cparams['passwd'] = get_authentication_token()
 
     @staticmethod
     def run():
