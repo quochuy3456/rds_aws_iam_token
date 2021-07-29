@@ -55,7 +55,13 @@ print("iam_token: ", iam_token)
 
 
 def get_authentication_token():
-    return passwd
+    client = boto3.client('rds', region_name=region_name)
+    token = client.generate_db_auth_token(DBHostname=host,
+                                          Port=port,
+                                          DBUsername=user,
+                                          Region=region_name)
+    iam_token = quote_plus(token)
+    return iam_token
 
 
 class Check:
@@ -82,7 +88,7 @@ class Check:
         print("dialect: ", dialect)
         print("conn_rec: ", conn_rec)
         print("cargs: ", cargs)
-        cparams['passwd'] = get_authentication_token()
+        cparams['token'] = get_authentication_token()
 
     def run(self):
         while True:
