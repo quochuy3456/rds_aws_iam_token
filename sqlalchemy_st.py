@@ -60,11 +60,11 @@ def get_authentication_token():
 
 class Check:
     # mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, passwd, host,
-    #                                                                        3306, "database-1")
+    #                                                                        3306, "isoar")
     #
     # engine = create_engine(mysql_connection_url, pool_recycle=10)
     mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, iam_token, host,
-                                                                           str(port), "database-1")
+                                                                           str(port), "isoar")
     engine = create_engine(mysql_connection_url,
                            connect_args=ssl_args,
                            pool_recycle=10)
