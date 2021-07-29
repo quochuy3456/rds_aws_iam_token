@@ -46,6 +46,8 @@ def provide_token(dialect, conn_rec, cargs, cparams):
     print("conn_rec: ", conn_rec)
     print("cargs: ", cargs)
     cparams['passwd'] = get_authentication_token()
+    session_mysql = Session(engine, autoflush=True)
+    Base.prepare(engine, reflect=True)
 
 
 def run():
