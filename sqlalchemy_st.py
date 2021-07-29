@@ -25,6 +25,7 @@ def get_authentication_token():
                                           DBUsername=user,
                                           Region=region_name)
     iam_token = quote_plus(token)
+    print(iam_token)
     return iam_token
 
 
@@ -44,7 +45,8 @@ def provide_token(dialect, conn_rec, cargs, cparams):
     print("dialect: ", dialect)
     print("conn_rec: ", conn_rec)
     print("cargs: ", cargs)
-    cparams.update({'token': get_authentication_token()})
+    token = get_authentication_token()
+    cparams['passwd'] = token
 
 
 def run():
