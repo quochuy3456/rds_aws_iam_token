@@ -44,7 +44,7 @@ def provide_token(dialect, conn_rec, cargs, cparams):
     print("dialect: ", dialect)
     print("conn_rec: ", conn_rec)
     print("cargs: ", cargs)
-    cparams.update({'passwd': get_authentication_token()})
+    cparams.update({'token': get_authentication_token()})
 
 
 def run():
