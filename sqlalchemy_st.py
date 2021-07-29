@@ -31,7 +31,6 @@ def get_authentication_token():
                                           DBUsername=user,
                                           Region=region_name)
     iam_token = quote_plus(token)
-    print(iam_token)
     return iam_token
 
 
@@ -55,11 +54,11 @@ class Check:
     @staticmethod
     @event.listens_for(engine, "do_connect")
     def provide_token(dialect, conn_rec, cargs, cparams):
-        cparams['passwd'] = get_authentication_token()
-        # print("cparams: ", cparams)
+        print("cparams: ", cparams)
         # print("dialect: ", dialect)
         # print("conn_rec: ", conn_rec)
         # print("cargs: ", cargs)
+        cparams['passwd'] = get_authentication_token()
 
     def run(self):
         while True:
