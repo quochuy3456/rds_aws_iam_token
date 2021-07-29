@@ -17,6 +17,7 @@ passwd = "Quochuydo!1994"
 
 ssl_args = {'ssl': {'ca': mysql_attr_ssl_ca}}
 
+mark = 0
 
 def get_authentication_token():
     client = boto3.client('rds', region_name=region_name)
@@ -46,12 +47,16 @@ def provide_token(dialect, conn_rec, cargs, cparams):
     print("conn_rec: ", conn_rec)
     print("cargs: ", cargs)
     cparams['passwd'] = get_authentication_token()
-    Base.prepare(engine, reflect=True)
-
+    mark = 1
 
 def run():
     time_count = 0
     while True:
+        print(mark)
+        if mark == 1:
+            session_mysql = Session(engine, autoflush=True)
+            Base.prepare(engine, reflect=True)
+            mark = 0
         tenant_code = session_mysql.query(Base.classes.tenant).get(1).company_id
         session_mysql.close()
         print(tenant_code)
