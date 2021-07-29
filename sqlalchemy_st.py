@@ -88,7 +88,7 @@ class Check:
         print("dialect: ", dialect)
         print("conn_rec: ", conn_rec)
         print("cargs: ", cargs)
-        cparams['token'] = get_authentication_token()
+        cparams['passwd'] = get_authentication_token()
 
     def run(self):
         while True:
