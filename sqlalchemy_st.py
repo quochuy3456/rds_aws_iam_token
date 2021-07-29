@@ -27,8 +27,8 @@ def get_authentication_token():
                                           DBUsername=user,
                                           Region=region_name)
     iam_token = quote_plus(token)
-    print(token)
-    return token
+    print(iam_token)
+    return iam_token
 
 
 mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, get_authentication_token(), host,
