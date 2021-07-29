@@ -33,7 +33,7 @@ mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, get
                                                                        str(port), "isoar")
 engine = create_engine(mysql_connection_url,
                        connect_args=ssl_args,
-                       pool_recycle=5)
+                       pool_recycle=50)
 
 session_mysql = Session(engine, autoflush=True)
 Base.prepare(engine, reflect=True)
@@ -50,11 +50,14 @@ def provide_token(dialect, conn_rec, cargs, cparams):
 
 
 def run():
+    time_count = 0
     while True:
         tenant_code = session_mysql.query(Base.classes.tenant).get(1).company_id
         session_mysql.close()
         print(tenant_code)
-        time.sleep(2)
+        time_count += 1
+        print(time_count)
+        time.sleep(60)
 
 
 run()
