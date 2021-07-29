@@ -62,25 +62,12 @@ def provide_token(dialect, conn_rec, cargs, cparams):
 def run():
     time_count = 0
     while True:
-        try:
-            tenant_code = session_mysql.query(Base.classes.tenant).get(1).company_id
-            session_mysql.close()
-            print(tenant_code)
-            time_count += 1
-            print(time_count)
-            time.sleep(2)
-        except:
-            mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, get_authentication_token(),
-                                                                                   host,
-                                                                                   str(port), "isoar")
-            engine = create_engine(mysql_connection_url,
-                                   connect_args=ssl_args,
-                                   pool_recycle=6)
-
-            session_mysql = Session(engine, autoflush=True)
-            Base.prepare(engine, reflect=True)
-            print("error => renew engine")
-            time.sleep(2)
+        tenant_code = session_mysql.query(Base.classes.tenant).get(1).company_id
+        session_mysql.close()
+        print(tenant_code)
+        time_count += 1
+        print(time_count)
+        time.sleep(2)
 
 
 run()
