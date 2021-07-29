@@ -45,7 +45,7 @@ class Check:
     # engine = create_engine(mysql_connection_url, pool_recycle=10)
 
     @staticmethod
-    @event.listens_for(engine, "do_connect")
+    @event.listens_for(engine, "connect")
     def provide_token(dialect, conn_rec, cargs, cparams):
         cparams.update({'passwd': get_authentication_token()})
         print("cparams: ", cparams)
