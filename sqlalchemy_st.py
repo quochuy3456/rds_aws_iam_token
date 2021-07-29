@@ -41,16 +41,6 @@ session_mysql = Session(engine, autoflush=True)
 Base.prepare(engine, reflect=True)
 
 
-mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, get_authentication_token(), host,
-                                                                       str(port), "isoar")
-engine = create_engine(mysql_connection_url,
-                       connect_args=ssl_args,
-                       pool_recycle=6)
-
-session_mysql = Session(engine, autoflush=True)
-Base.prepare(engine, reflect=True)
-
-
 @event.listens_for(engine, "do_connect")
 def provide_token(dialect, conn_rec, cargs, cparams):
     print("cparams: ", cparams)
@@ -58,6 +48,7 @@ def provide_token(dialect, conn_rec, cargs, cparams):
     print("conn_rec: ", conn_rec)
     print("cargs: ", cargs)
     cparams['passwd'] = get_authentication_token()
+
 
 def run():
     time_count = 0
