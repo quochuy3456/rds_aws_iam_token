@@ -38,28 +38,21 @@ session_mysql = Session(engine, autoflush=True)
 Base.prepare(engine, reflect=True)
 
 
-class Check:
-    # mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, passwd, host,
-    #                                                                        3306, "isoar")
-    #
-    # engine = create_engine(mysql_connection_url, pool_recycle=10)
-
-    @staticmethod
-    @event.listens_for(engine, "connect")
-    def provide_token(dialect, conn_rec, cargs, cparams):
-        cparams.update({'passwd': get_authentication_token()})
-        print("cparams: ", cparams)
-        # print("dialect: ", dialect)
-        # print("conn_rec: ", conn_rec)
-        # print("cargs: ", cargs)
-
-    @staticmethod
-    def run():
-        while True:
-            tenant_code = session_mysql.query(Base.classes.tenant).get(1).company_id
-            session_mysql.close()
-            print(tenant_code)
-            time.sleep(2)
+@event.listens_for(engine, "do_connect")
+def provide_token(dialect, conn_rec, cargs, cparams):
+    print("cparams: ", cparams)
+    print("dialect: ", dialect)
+    print("conn_rec: ", conn_rec)
+    print("cargs: ", cargs)
+    cparams.update({'passwd': get_authentication_token()})
 
 
-Check().run()
+def run():
+    while True:
+        tenant_code = session_mysql.query(Base.classes.tenant).get(1).company_id
+        session_mysql.close()
+        print(tenant_code)
+        time.sleep(2)
+
+
+run()
