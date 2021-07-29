@@ -8,7 +8,7 @@ import time
 
 Base = automap_base()
 
-mysql_attr_ssl_ca = "./rds-combined-ca-bundle.pem"
+mysql_attr_ssl_ca = "rds-ca-2015-root.pem"
 region_name = "ap-northeast-1"
 host = "database-1.cgjasvizzmcb.ap-northeast-1.rds.amazonaws.com"
 port = 3306
