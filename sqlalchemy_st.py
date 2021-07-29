@@ -51,7 +51,7 @@ class Check:
         # print("dialect: ", dialect)
         # print("conn_rec: ", conn_rec)
         # print("cargs: ", cargs)
-        cparams['passwd'] = get_authentication_token()
+        # cparams['passwd'] = get_authentication_token()
 
     @staticmethod
     def run():
