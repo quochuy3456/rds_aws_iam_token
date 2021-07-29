@@ -89,7 +89,7 @@ class Check:
             tenant_code = self.session_mysql.query(Base.classes.tenant).get(1).company_id
             self.session_mysql.close()
             print(tenant_code)
-            time.sleep(12)
+            time.sleep(2)
 
 
 Check().run()
