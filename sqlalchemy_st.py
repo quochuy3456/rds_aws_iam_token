@@ -37,7 +37,7 @@ def get_authentication_token():
 mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, get_authentication_token(), host,
                                                                        str(port), "isoar")
 engine = create_engine(mysql_connection_url,
-                       # connect_args=ssl_args,
+                       connect_args=ssl_args,
                        pool_recycle=6)
 
 session_mysql = Session(engine, autoflush=True)
