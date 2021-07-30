@@ -14,11 +14,10 @@ host = "database-1.cgjasvizzmcb.ap-northeast-1.rds.amazonaws.com"
 port = 3306
 user = "rds_iam_user"
 # user = "admin"
-passwd = "Quochuydo!1994"
+# passwd = "Quochuydo!1994"
 
 ssl_args = {'ssl': {'ca': mysql_attr_ssl_ca}}
 
-mark_aa = 0
 client = boto3.client('rds', region_name=region_name)
 
 
@@ -28,13 +27,13 @@ def get_authentication_token():
                                           DBUsername=user,
                                           Region=region_name)
     iam_token = quote_plus(token)
-    print("token: ", token)
-    print("iam_token: ", iam_token)
     return iam_token
     # return passwd
 
 
-mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, get_authentication_token(), host,
+token = get_authentication_token()
+
+mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, token, host,
                                                                        str(port), "isoar")
 engine = create_engine(mysql_connection_url,
                        connect_args=ssl_args,
@@ -47,10 +46,7 @@ Base.prepare(engine, reflect=True)
 @event.listens_for(engine, "do_connect")
 def provide_token(dialect, conn_rec, cargs, cparams):
     print("cparams: ", cparams)
-    print("Lỗi ở đây !!")
     cparams['passwd'] = get_authentication_token()
-    cparams['ssl']['ca'] = './rds-ca-2019-root.pem'
-    print("Lỗi ở đây ??")
 
 
 def run():
