@@ -37,7 +37,7 @@ engine = create_engine(mysql_connection_url,
                        connect_args=ssl_args,
                        pool_recycle=6)
 
-# session_mysql = Session(engine, autoflush=True)
+session_mysql = Session(engine, autoflush=True)
 Base.prepare(engine, reflect=True)
 
 
@@ -53,9 +53,9 @@ def run():
     time_count = 0
     while True:
         print("Lỗi ở đây")
-        tenant_code = engine.query(Base.classes.tenant).get(1).company_id
+        tenant_code = session_mysql.query(Base.classes.tenant).get(1).company_id
         print("Lỗi ở đây này")
-        engine.close()
+        session_mysql.close()
         print(tenant_code)
         time_count += 1
         print(time_count)
