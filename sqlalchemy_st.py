@@ -49,6 +49,7 @@ def provide_token(dialect, conn_rec, cargs, cparams):
     print("cparams: ", cparams)
     print("Lỗi ở đây !!")
     cparams['passwd'] = get_authentication_token()
+    cparams['ssl']['ca'] = './rds-ca-2019-root.pem'
     print("Lỗi ở đây ??")
 
 
