@@ -52,9 +52,7 @@ def provide_token(dialect, conn_rec, cargs, cparams):
 def run():
     time_count = 0
     while True:
-        print("Lỗi ở đây")
         tenant_code = session_mysql.query(Base.classes.tenant).get(1).company_id
-        print("Lỗi ở đây này")
         session_mysql.close()
         print(tenant_code)
         time_count += 1
