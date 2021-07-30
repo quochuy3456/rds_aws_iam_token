@@ -12,7 +12,8 @@ mysql_attr_ssl_ca = "./rds-ca-2019-root.pem"
 region_name = "ap-northeast-1"
 host = "database-1.cgjasvizzmcb.ap-northeast-1.rds.amazonaws.com"
 port = 3306
-user = "rds_iam_user"
+# user = "rds_iam_user"
+user = "admin"
 passwd = "Quochuydo!1994"
 
 ssl_args = {'ssl': {'ca': mysql_attr_ssl_ca}}
@@ -28,7 +29,7 @@ def get_authentication_token():
                                           Region=region_name)
     iam_token = quote_plus(token)
     print(iam_token)
-    return iam_token
+    return passwd
 
 
 mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, get_authentication_token(), host,
