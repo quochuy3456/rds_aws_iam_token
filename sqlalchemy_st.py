@@ -38,7 +38,7 @@ engine = create_engine(mysql_connection_url,
                        pool_recycle=6)
 
 session_mysql = Session(engine, autoflush=True)
-Base.prepare(engine, reflect=True)
+# Base.prepare(engine, reflect=True)
 
 
 @event.listens_for(engine, "do_connect")
