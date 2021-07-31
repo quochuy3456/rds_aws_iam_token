@@ -12,8 +12,8 @@ mysql_attr_ssl_ca = "./rds-combined-ca-bundle.pem"
 region_name = "us-east-2"
 host = "isoar-database-1.cqxkpsrs9pdj.us-east-2.rds.amazonaws.com"
 port = 3306
-# user = "rds_iam_user"
-user = "isoaradmin"
+user = "rds_iam_user"
+# user = "isoaradmin"
 passwd = "NTQ202107"
 
 ssl_args = {'ssl': {'ca': mysql_attr_ssl_ca}}
@@ -27,8 +27,8 @@ def get_authentication_token():
                                           DBUsername=user,
                                           Region=region_name)
     iam_token = quote_plus(token)
-    # return iam_token
-    return passwd
+    return iam_token
+    # return passwd
 
 
 token = get_authentication_token()
