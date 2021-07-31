@@ -9,7 +9,7 @@ import time
 Base = automap_base()
 
 mysql_attr_ssl_ca = "./rds-combined-ca-bundle.pem"
-region_name = "ap-northeast-1"
+region_name = "us-east-2"
 host = "database-1.cgjasvizzmcb.ap-northeast-1.rds.amazonaws.com"
 port = 3306
 # user = "rds_iam_user"
@@ -34,7 +34,7 @@ def get_authentication_token():
 token = get_authentication_token()
 
 mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, token, host,
-                                                                       str(port), "isoar")
+                                                                       str(port), "isoar_database_1")
 engine = create_engine(mysql_connection_url,
                        connect_args=ssl_args,
                        pool_recycle=6)
