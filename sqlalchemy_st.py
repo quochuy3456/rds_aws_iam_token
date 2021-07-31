@@ -10,7 +10,7 @@ Base = automap_base()
 
 mysql_attr_ssl_ca = "./rds-combined-ca-bundle.pem"
 region_name = "us-east-2"
-host = "database-1.cgjasvizzmcb.ap-northeast-1.rds.amazonaws.com"
+host = "isoar-database-1.cqxkpsrs9pdj.us-east-2.rds.amazonaws.com"
 port = 3306
 # user = "rds_iam_user"
 user = "isoaradmin"
