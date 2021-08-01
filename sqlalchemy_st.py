@@ -46,7 +46,7 @@ Base.prepare(engine, reflect=True)
 @event.listens_for(engine, "do_connect")
 def provide_token(dialect, conn_rec, cargs, cparams):
     print("cparams: ", cparams)
-    # cparams['passwd'] = get_authentication_token()
+    cparams['passwd'] = get_authentication_token()
 
 
 def run():
