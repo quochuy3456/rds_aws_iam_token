@@ -14,9 +14,9 @@ host = "isoar-database-1.cqxkpsrs9pdj.us-east-2.rds.amazonaws.com"
 port = 3306
 user = "rds_iam_user"
 # user = "isoaradmin"
-passwd = "NTQ202107"
+# passwd = "NTQ202107"
 
-ssl_args = {'ssl': {'ca': mysql_attr_ssl_ca}}
+ssl_args = {'ssl': {'ca': mysql_attr_ssl_ca, "ENABLE_CLEARTEXT_PLUGIN": 1}}
 
 client = boto3.client('rds', region_name=region_name)
 
@@ -27,6 +27,7 @@ def get_authentication_token():
                                           DBUsername=user,
                                           Region=region_name)
     iam_token = quote_plus(token)
+    print(iam_token)
     return iam_token
     # return passwd
 
@@ -34,7 +35,7 @@ def get_authentication_token():
 token = get_authentication_token()
 
 mysql_connection_url = 'mysql+mysqldb://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, token, host,
-                                                                       str(port), "isoar_database_1")
+                                                                               str(port), "isoar_database_1")
 engine = create_engine(mysql_connection_url,
                        connect_args=ssl_args,
                        pool_recycle=6)
@@ -61,3 +62,25 @@ def run():
 
 
 run()
+
+
+
+# import mysql.connector
+# from mysql.connector.constants import ClientFlag
+#
+# config = {
+#     'user': user,
+#     'password': get_authentication_token(),
+#     'host': host,
+#     'client_flags': [ClientFlag.SSL],
+#     'ssl_ca': mysql_attr_ssl_ca,
+# }
+#
+# print(config)
+#
+# cnx = mysql.connector.connect(**config)
+# cur = cnx.cursor(buffered=True)
+# cur.execute("SHOW STATUS LIKE 'Ssl_cipher'")
+# print(cur.fetchone())
+# cur.close()
+# cnx.close()
