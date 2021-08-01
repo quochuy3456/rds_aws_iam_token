@@ -33,7 +33,7 @@ def get_authentication_token():
 
 token = get_authentication_token()
 
-mysql_connection_url = 'mysql://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, token, host,
+mysql_connection_url = 'mysql+mysqldb://{}:{}@{}:{}/{}?charset=utf8mb4'.format(user, token, host,
                                                                        str(port), "isoar_database_1")
 engine = create_engine(mysql_connection_url,
                        connect_args=ssl_args,
