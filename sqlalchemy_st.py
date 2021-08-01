@@ -47,9 +47,7 @@ Base.prepare(engine, reflect=True)
 def provide_token(dialect, conn_rec, cargs, cparams):
     print("cparams: ", cparams)
     cparams['passwd'] = get_authentication_token()
-    engine = create_engine(mysql_connection_url,
-                           connect_args=ssl_args,
-                           pool_recycle=6)
+    Base.prepare(engine, reflect=True)
 
 
 def run():
